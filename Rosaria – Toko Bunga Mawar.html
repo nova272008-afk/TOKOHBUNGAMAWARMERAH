@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rosaria – Toko Bunga Mawar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbf1f3; --surface:#ffffff; --ink:#3a1520; --muted:#7a5560; --wine:#7d1230; --rose:#c8324f; --blush:#f4d3da; --leaf:#3f5d45; --line:#ecd3d9; --onwine:#fff;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#1c0d12; --surface:#2a131a; --ink:#f8e8ec; --muted:#c9a3ad; --wine:#e0607c; --rose:#e8728c; --blush:#3a1822; --leaf:#8fb597; --line:#44212b; --onwine:#2a0a14; color-scheme:dark;}
+}
+:root[data-theme="dark"]{--bg:#1c0d12; --surface:#2a131a; --ink:#f8e8ec; --muted:#c9a3ad; --wine:#e0607c; --rose:#e8728c; --blush:#3a1822; --leaf:#8fb597; --line:#44212b; --onwine:#2a0a14; color-scheme:dark;}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Figtree",system-ui,sans-serif;line-height:1.6;font-size:17px}
+h1,h2,h3{font-family:"Fraunces",Georgia,serif;line-height:1.1;margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--rose);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header.top{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.brand{font-family:"Fraunces",serif;font-weight:700;font-size:1.5rem;color:var(--wine);text-decoration:none}
+nav a{margin-left:20px;text-decoration:none;color:var(--muted);font-weight:500}
+nav a:hover{color:var(--wine)}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:center;padding:32px 0 64px}
+.hero h1{font-size:clamp(2.6rem,7vw,4.8rem);font-weight:700;color:var(--wine);letter-spacing:-.02em}
+.hero p{max-width:46ch;color:var(--muted);font-size:1.1rem;margin:20px 0 28px}
+.btn{display:inline-block;background:var(--wine);color:var(--onwine);padding:14px 26px;border-radius:999px;font-weight:600;text-decoration:none;border:0;font:inherit;font-weight:600;cursor:pointer}
+.btn:hover{background:var(--rose)}
+.btn.ghost{background:transparent;color:var(--wine);border:2px solid var(--wine);margin-left:8px}
+.btn.ghost:hover{background:var(--blush)}
+.hero-art{display:flex;justify-content:center}
+.hero-art svg{width:min(100%,380px);height:auto;filter:drop-shadow(0 18px 24px rgba(125,18,48,.25))}
+section{padding:48px 0}
+h2{font-size:clamp(1.8rem,4vw,2.6rem);color:var(--wine);margin-bottom:8px}
+.sub{color:var(--muted);margin:0 0 24px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.chip{border:1.5px solid var(--line);background:var(--surface);color:var(--ink);padding:8px 16px;border-radius:999px;font:inherit;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--wine);color:var(--onwine);border-color:var(--wine)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column}
+.card .pic{background:var(--blush);border-radius:12px;display:grid;place-items:center;padding:18px;margin-bottom:14px}
+.card .pic svg{width:96px;height:96px}
+.card h3{font-size:1.25rem}
+.card p{color:var(--muted);font-size:.95rem;margin:6px 0 12px;flex:1}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.price{font-weight:600;color:var(--wine)}
+.qty{display:flex;align-items:center;gap:8px}
+.qty button{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--wine);background:transparent;color:var(--wine);font-size:1.1rem;cursor:pointer}
+.qty button:hover{background:var(--blush)}
+.qty span{min-width:1.4em;text-align:center;font-weight:600}
+.cart{position:sticky;bottom:calc(12px + env(safe-area-inset-bottom,0px));margin-top:28px;background:var(--wine);color:var(--onwine);border-radius:18px;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.cart .btn{background:var(--onwine);color:var(--wine)}
+.cart[hidden]{display:none}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px}
+.info div{border-left:4px solid var(--rose);padding-left:16px}
+.info h3{font-size:1.2rem;margin-bottom:6px}
+.info p{margin:0;color:var(--muted)}
+footer{border-top:1px solid var(--line);margin-top:40px;padding:28px 0 36px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+@media (max-width:760px){.hero{grid-template-columns:1fr}.hero-art{order:-1}nav a{margin-left:12px}.btn.ghost{margin:10px 0 0}}
+@media (prefers-reduced-motion:no-preference){.hero-art svg{animation:sway 6s ease-in-out infinite;transform-origin:50% 100%}}
+@keyframes sway{50%{transform:rotate(2.5deg)}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="rose" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="currentColor"/>
+    <circle cx="50" cy="50" r="46" fill="#000" fill-opacity=".12"/>
+    <circle cx="50" cy="46" r="34" fill="currentColor"/>
+    <circle cx="50" cy="44" r="22" fill="currentColor"/>
+    <circle cx="50" cy="44" r="22" fill="#fff" fill-opacity=".08"/>
+    <g fill="none" stroke="#000" stroke-opacity=".28" stroke-width="2" stroke-linecap="round">
+      <path d="M46 46a4 4 0 1 1 8 0a9 9 0 1 1-18 0a15 15 0 1 1 30 0a22 22 0 1 1-44 0"/>
+      <path d="M10 56c6 22 28 34 40 34s34-12 40-34" stroke-opacity=".18"/>
+    </g>
+  </symbol>
+</svg>
+
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#">Rosaria</a>
+    <nav><a href="#koleksi">Koleksi</a><a href="#layanan">Layanan</a><a href="#kontak">Kontak</a></nav>
+  </header>
+
+  <div class="hero">
+    <div>
+      <h1>Mawar segar, dirangkai dengan sepenuh hati.</h1>
+      <p>Dipetik pagi hari, dirangkai di hari yang sama, dan diantar ke pintu orang yang Anda sayangi. Untuk ulang tahun, wisuda, lamaran, atau sekadar bilang terima kasih.</p>
+      <a class="btn" href="#koleksi">Lihat koleksi</a><a class="btn ghost" href="#layanan">Cara pesan</a>
+    </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 300 420" role="img" aria-label="Setangkai mawar merah">
+        <path d="M150 190 C150 270 140 340 150 410" stroke="var(--leaf)" stroke-width="9" fill="none" stroke-linecap="round"/>
+        <path d="M148 300 C110 280 80 285 62 262 C98 252 130 266 148 300Z" fill="var(--leaf)"/>
+        <path d="M152 345 C190 322 222 328 240 304 C204 296 172 312 152 345Z" fill="var(--leaf)" opacity=".85"/>
+        <use href="#rose" x="35" y="20" width="230" height="230" style="color:var(--rose)"/>
+      </svg>
+    </div>
+  </div>
+
+  <section id="koleksi">
+    <h2>Koleksi mawar</h2>
+    <p class="sub">Pilih warna, tambahkan ke keranjang, lalu kirim pesanan lewat WhatsApp.</p>
+    <div class="chips" id="chips" role="group" aria-label="Filter warna"></div>
+    <div class="grid" id="grid"></div>
+    <div class="cart" id="cart" hidden>
+      <div><strong id="cartCount">0</strong> item · <strong id="cartTotal">Rp0</strong></div>
+      <a class="btn" id="wa" href="#" target="_blank" rel="noopener">Pesan via WhatsApp</a>
+    </div>
+  </section>
+
+  <section id="layanan">
+    <h2>Layanan kami</h2>
+    <p class="sub">Tiga hal yang membuat pesanan Anda lebih mudah.</p>
+    <div class="info">
+      <div><h3>Pengantaran hari yang sama</h3><p>Pesan sebelum pukul 14.00, bunga tiba sore ini di dalam kota.</p></div>
+      <div><h3>Kartu ucapan gratis</h3><p>Tulis pesan Anda di WhatsApp, kami cetak dan selipkan di rangkaian.</p></div>
+      <div><h3>Segar atau diganti</h3><p>Bunga layu dalam 3 hari? Kirim foto, kami ganti tanpa biaya.</p></div>
+    </div>
+  </section>
+
+  <footer id="kontak">
+    <span>Rosaria · Buka setiap hari, 08.00–20.00</span>
+    <span>WhatsApp 0812-3456-7890</span>
+  </footer>
+</div>
+
+<script>
+const WA = "6281234567890"; // ganti dengan nomor WhatsApp toko Anda
+const products = [
+  {id:1,name:"Mawar Merah Klasik",color:"Merah",price:15000,desc:"Per tangkai. Lambang cinta yang tak pernah ketinggalan zaman.",tone:"#c8324f"},
+  {id:2,name:"Mawar Pink Lembut",color:"Pink",price:14000,desc:"Per tangkai. Manis untuk ucapan terima kasih dan sayang.",tone:"#ec8fa5"},
+  {id:3,name:"Mawar Putih Murni",color:"Putih",price:15000,desc:"Per tangkai. Pilihan untuk pernikahan dan ucapan duka cita.",tone:"#f1e7e4"},
+  {id:4,name:"Mawar Kuning Ceria",color:"Kuning",price:13000,desc:"Per tangkai. Cocok untuk persahabatan dan wisuda.",tone:"#f0b93a"},
+  {id:5,name:"Buket Mawar Merah 12",color:"Merah",price:185000,desc:"12 tangkai mawar merah, daun eucalyptus, kertas pembungkus.",tone:"#a8203d"},
+  {id:6,name:"Buket Mawar Pink 20",color:"Pink",price:299000,desc:"20 tangkai mawar pink, baby’s breath, pita satin.",tone:"#e56f8e"},
+  {id:7,name:"Box Mawar Putih",color:"Putih",price:249000,desc:"15 mawar putih tersusun rapi dalam box hitam elegan.",tone:"#e9dcd8"},
+  {id:8,name:"Mawar Peach Hangat",color:"Pink",price:16000,desc:"Per tangkai. Warna peach yang hangat dan tidak biasa.",tone:"#f4a58a"}
+];
+const cart = {};
+let filter = "Semua";
+const rp = n => "Rp" + n.toLocaleString("id-ID");
+const $ = id => document.getElementById(id);
+
+function chips(){
+  const colors = ["Semua", ...new Set(products.map(p => p.color))];
+  $("chips").innerHTML = colors.map(c => `<button class="chip" aria-pressed="${c===filter}" data-c="${c}">${c}</button>`).join("");
+  $("chips").querySelectorAll("button").forEach(b => b.onclick = () => { filter = b.dataset.c; chips(); grid(); });
+}
+function grid(){
+  $("grid").innerHTML = products.filter(p => filter==="Semua" || p.color===filter).map(p => `
+    <article class="card">
+      <div class="pic"><svg viewBox="0 0 100 100" style="color:${p.tone}" aria-hidden="true"><use href="#rose"/></svg></div>
+      <h3>${p.name}</h3><p>${p.desc}</p>
+      <div class="row"><span class="price">${rp(p.price)}</span>
+        <div class="qty"><button aria-label="Kurangi ${p.name}" data-id="${p.id}" data-d="-1">−</button><span>${cart[p.id]||0}</span><button aria-label="Tambah ${p.name}" data-id="${p.id}" data-d="1">+</button></div>
+      </div>
+    </article>`).join("");
+  $("grid").querySelectorAll(".qty button").forEach(b => b.onclick = () => {
+    const id = +b.dataset.id; cart[id] = Math.max(0, (cart[id]||0) + +b.dataset.d);
+    if(!cart[id]) delete cart[id];
+    grid(); summary();
+  });
+}
+function summary(){
+  const items = products.filter(p => cart[p.id]);
+  const count = items.reduce((s,p) => s + cart[p.id], 0);
+  const total = items.reduce((s,p) => s + cart[p.id]*p.price, 0);
+  $("cart").hidden = !count;
+  $("cartCount").textContent = count; $("cartTotal").textContent = rp(total);
+  const lines = items.map(p => `- ${p.name} x${cart[p.id]} (${rp(p.price*cart[p.id])})`).join("\n");
+  $("wa").href = "https://wa.me/" + WA + "?text=" + encodeURIComponent("Halo Rosaria, saya ingin memesan:\n" + lines + "\nTotal: " + rp(total));
+}
+chips(); grid(); summary();
+</script>
+</body>
+</html>
